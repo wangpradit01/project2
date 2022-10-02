@@ -96,7 +96,7 @@ SizedBox(height: 5,),
                 ],
               ),
             ),
-SizedBox(height: 40,),
+            SizedBox(height: 40,),
             Container(
               padding: EdgeInsets.only(
                 left: 35,
