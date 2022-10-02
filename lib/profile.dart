@@ -1,3 +1,4 @@
+import 'package:baowan/consumption_screen.dart';
 import 'package:baowan/tapmanu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,365 +15,368 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF3F3F3),
-        appBar: _buildAppBar(),
-        bottomNavigationBar: BottomNavigationBar1(),
-        body: WillPopScope(
-          onWillPop: () async => false,
-          child: ListView(
-            shrinkWrap: false,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 37, bottom: 20),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
+      backgroundColor: Color(0xffF3F3F3),
+      appBar: _buildAppBar(),
+      bottomNavigationBar: BottomNavigationBar1(),
+      body: WillPopScope(
+        onWillPop: () async => false,
+        child: ListView(
+          shrinkWrap: false,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 37, bottom: 20),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "เมนูหลัก",
+                style: GoogleFonts.prompt(
+                  textStyle: TextStyle(
+                      color: Color(0xff757575),
+                      letterSpacing: .54,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
                 ),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "เมนูหลัก",
-                  style: GoogleFonts.prompt(
-                    textStyle: TextStyle(
-                        color: Color(0xff757575),
-                        letterSpacing: .54,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
+              ),
+            ),
+
+            //การบริโภค
+            Container(
+              height: 300,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) => const ConsumtionScreen()
+                        )
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 80,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "การบริโภค",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 53,
+                            height: 53,
+                            child: Image.asset('assets/image/woman2x.png'),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-        
-              //การบริโภค
-              Container(
-                height: 300,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "การบริโภค",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 53,
-                              height: 53,
-                              child: Image.asset('assets/image/woman2x.png'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-        
-                    SizedBox(
-                      height: 18,
-                    ),
-        
-                    //ข้อมูลโภชนาการ
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "ข้อมูลโภชนาการ",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 53,
-                              height: 53,
-                              child: Image.asset('assets/image/bibimbap2x.png'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-        
-                    SizedBox(
-                      height: 18,
-                    ),
-        
-                    //ประวัติการบริโภค
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "ประวัติการบริโภค",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 41,
-                              height: 41,
-                              child: Image.asset('assets/image/homework2x.png'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10,),
-              Container(
-                margin: EdgeInsets.only(top: 0, bottom: 20),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "ประวัติการบริโภคล่าสุด",
-                  style: GoogleFonts.prompt(
-                    textStyle: TextStyle(
-                        color: Color(0xff757575),
-                        letterSpacing: .54,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
+
+                  SizedBox(
+                    height: 18,
                   ),
+
+                  //ข้อมูลโภชนาการ
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => print('tap'),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 80,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "ข้อมูลโภชนาการ",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 53,
+                            height: 53,
+                            child: Image.asset('assets/image/bibimbap2x.png'),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 18,
+                  ),
+
+                  //ประวัติการบริโภค
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => print('tap'),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 80,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "ประวัติการบริโภค",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 41,
+                            height: 41,
+                            child: Image.asset('assets/image/homework2x.png'),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 0, bottom: 20),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "ประวัติการบริโภคล่าสุด",
+                style: GoogleFonts.prompt(
+                  textStyle: TextStyle(
+                      color: Color(0xff757575),
+                      letterSpacing: .54,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
-        
-              Container(
-                height: 300,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 56,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "08/09/65",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
+            ),
+
+            Container(
+              height: 300,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => print('tap'),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 56,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "08/09/65",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
                             ),
-                           Icon(
+                          ),
+                          Icon(
                             Icons.arrow_forward_ios_outlined,
                             size: 20,
                             color: Color(0xff3B81FF),
-                           ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-        
-                    SizedBox(height: 13,),
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 56,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "07/09/65",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
+                  ),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => print('tap'),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 56,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "07/09/65",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
                             ),
-                           Icon(
+                          ),
+                          Icon(
                             Icons.arrow_forward_ios_outlined,
                             size: 20,
                             color: Color(0xff3B81FF),
-                           ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-        
-        
-                    SizedBox(height: 13,),
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 56,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "06/09/65",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
+                  ),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => print('tap'),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 56,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "06/09/65",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
                             ),
-                           Icon(
+                          ),
+                          Icon(
                             Icons.arrow_forward_ios_outlined,
                             size: 20,
                             color: Color(0xff3B81FF),
-                           ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-        
-                    SizedBox(height: 13,),
-                    GestureDetector(
-                      behavior: HitTestBehavior.translucent,
-                      onTap: () => print('tap'),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        height: 56,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  spreadRadius: 5,
-                                  color: Color(0x11000000))
-                            ]),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "05/09/65",
-                                style: GoogleFonts.prompt(
-                                  textStyle: TextStyle(
-                                      letterSpacing: .39,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black),
-                                ),
+                  ),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () => print('tap'),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      height: 56,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 3,
+                                spreadRadius: 5,
+                                color: Color(0x11000000))
+                          ]),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "05/09/65",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
                             ),
-                           Icon(
+                          ),
+                          Icon(
                             Icons.arrow_forward_ios_outlined,
                             size: 20,
                             color: Color(0xff3B81FF),
-                           ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                  
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        
-        );
+      ),
+    );
   }
-
-
-
-
-
 
   AppBar _buildAppBar() {
     return AppBar(
@@ -423,4 +427,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
