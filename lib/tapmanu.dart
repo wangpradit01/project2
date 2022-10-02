@@ -66,7 +66,7 @@ class _BottomNavigationBar1State extends State<BottomNavigationBar1> {
                        setState(() {
                         _selectedIndex = 0;
                       });
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => Profile()),);
                       
                     }),
@@ -80,7 +80,7 @@ class _BottomNavigationBar1State extends State<BottomNavigationBar1> {
                        setState(() {
                         _selectedIndex = 1;
                       });
-                       Navigator.push(context,
+                       Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => Alarm()),);
                     }),
 
@@ -93,8 +93,10 @@ class _BottomNavigationBar1State extends State<BottomNavigationBar1> {
                       setState(() {
                         _selectedIndex = 2;
                       });
-                     
-                    })
+                     Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => Setting()),);
+                    }),
+                    
               ],
             ),
           ),
@@ -129,14 +131,14 @@ class IconBottomBar extends StatelessWidget {
                 onPressed: onPressed,
                 icon: Icon(icon,
                     size: 25,
-                    color: selected ? Colors.blue : Colors.grey[600])),
+                    color: selected ? Colors.blue : Colors.blue)),
             Text(
               text,
               style: GoogleFonts.prompt(
                 textStyle: TextStyle(
                 fontSize: 12,
                 height:0.5,
-                color: selected ? Colors.blue : Colors.grey[600],
+                color: selected ? Colors.blue : Colors.blue,
               ),
             ),
         )],

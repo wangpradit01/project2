@@ -33,74 +33,82 @@ class _AlarmState extends State<Alarm> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar1(),
-        body: Column(
-          
-          children: [
-            
-          SizedBox(
-            height: 10,
-          ),
-          
-          GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () => print('tap'),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: 56,
-                decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 3,
-                          spreadRadius: 5,
-                          color: Color(0x11000000))
-                    ]),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.edit,
-                          size: 17,
-                          color: Color(0xffAFAFAF)),
-                          Text(
-                            "แก้ไข",
-                            style: GoogleFonts.prompt(
-                              textStyle: TextStyle(
-                                  letterSpacing: .39,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xffAFAFAF)),
+        body: WillPopScope(
+          onWillPop: () async => false,
+          child: Column(
+            children: [
+                 GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: () => print('tap'),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  height: 56,
+                  decoration: BoxDecoration(
+                      // borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 3,
+                            spreadRadius: 5,
+                            color: Color(0x11000000))
+                      ]),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.edit,
+                            size: 17,
+                            color: Color(0xffAFAFAF)),
+                            Text(
+                              "แก้ไข",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xffAFAFAF)),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.add_circle,
-                          size: 20,
-                          color: Colors.blue,),
-                          Text(
-                            "เพิ่มการเตือน",
-                            style: GoogleFonts.prompt(
-                              textStyle: TextStyle(
-                                  letterSpacing: .39,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xff3B81FF)),
-                            ),
-                          )
-                        ],
-                      )
-                    ]),
-                    
-              
-               
-              )),
-              
-              
-        ])
-        );
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.add_circle,
+                            size: 20,
+                            color: Colors.blue,),
+                            Text(
+                              "เพิ่มการเตือน",
+                              style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff3B81FF)),
+                              ),
+                            )
+                          ],
+                        )
+                      ]),
+                      
+                
+                 
+                 )),
+              Expanded(child: Container(
+                alignment: Alignment.center,
+                child: 
+                Text("ยังไม่มีการเตือนความจำ",
+                style: GoogleFonts.prompt(
+                                textStyle: TextStyle(
+                                    letterSpacing: .39,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xffAFAFAF)),
+                              ),),
+                //color: Colors.red,
+              ))
+            ],
+             ),
+        ) );
   }
 }
