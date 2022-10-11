@@ -16,16 +16,19 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        toolbarHeight: 100,
+      
+        backgroundColor: Color(0xff3B81FF),
         title: Text(
           "การบริโภค",
           style: GoogleFonts.prompt(
             textStyle: const TextStyle(
-              letterSpacing: 0.66,
-              fontWeight: FontWeight.w600,
-            ),
+                letterSpacing: .54,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.white),
           ),
-        )
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

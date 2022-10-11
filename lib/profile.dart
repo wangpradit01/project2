@@ -1,4 +1,6 @@
 import 'package:baowan/consumption_screen.dart';
+import 'package:baowan/history.dart';
+import 'package:baowan/food.dart';
 import 'package:baowan/tapmanu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -99,7 +101,13 @@ class _ProfileState extends State<Profile> {
                   //ข้อมูลโภชนาการ
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
-                    onTap: () => print('tap'),
+                    onTap: () {
+ Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) => const Food()
+                        )
+                      );
+                    },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       height: 80,
@@ -143,7 +151,13 @@ class _ProfileState extends State<Profile> {
                   //ประวัติการบริโภค
                   GestureDetector(
                     behavior: HitTestBehavior.translucent,
-                    onTap: () => print('tap'),
+                    onTap: () {
+                      Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) => const History()
+                        )
+                      );
+                    },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       height: 80,

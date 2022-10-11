@@ -57,7 +57,12 @@ class _SettingState extends State<Setting> {
           Container(
             child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () => print('tap'),
+                onTap: () {
+                  Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailProfile()
+                        ));
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   height: 65,
@@ -89,13 +94,12 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                       ),
-                       IconButton(onPressed: (() {
-                        Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => DetailProfile()),);
-                      }), 
-                      icon: Icon(Icons.arrow_forward_ios_outlined),
-                      iconSize: 20,
-                      color: Color(0xff757575),)
+                     
+                      Icon(Icons.arrow_forward_ios_outlined,
+                      size: 20,
+                      color: Color(0xff757575)),
+                      
+                      
                       
                       
                       
