@@ -14,6 +14,7 @@ class Alarm extends StatefulWidget {
 }
 
 class _AlarmState extends State<Alarm> {
+  List notiList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class _AlarmState extends State<Alarm> {
         bottomNavigationBar: BottomNavigationBar1(),
         body: WillPopScope(
           onWillPop: () async => false,
-          child: Column(
+          child: ListView(
             children: [
               GestureDetector(
                   behavior: HitTestBehavior.translucent,
@@ -73,11 +74,12 @@ class _AlarmState extends State<Alarm> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () {
-                              showModalBottomSheet(
+                            onTap: () async {
+                              var res = await showModalBottomSheet(
                                 isScrollControlled: true,
                                 context: context,
                                 builder: (context) {
+                                  Duration time = Duration(hours: 0);
                                   return Container(
                                     padding: const EdgeInsets.all(20),
                                     child: Column(
@@ -95,7 +97,9 @@ class _AlarmState extends State<Alarm> {
                                           ],
                                         ),
                                         CupertinoTimerPicker(
-                                          onTimerDurationChanged: (value) {},
+                                          onTimerDurationChanged: (value) {
+                                            time = value;
+                                          },
                                         ),
                                         Container(
                                             alignment: Alignment.centerLeft,
@@ -128,7 +132,9 @@ class _AlarmState extends State<Alarm> {
                                                 height: 40,
                                                 child: ElevatedButton(
                                                     child: Text('เพิ่ม'),
-                                                    onPressed: () {}),
+                                                    onPressed: () {
+                                                      Navigator.pop(context, time!);
+                                                    }),
                                               ),
                                             ),
                                           ],
@@ -141,6 +147,15 @@ class _AlarmState extends State<Alarm> {
                                   );
                                 },
                               );
+                              if(res == Duration(hours: 0))
+                              {
+
+                              } else {
+                                setState(() {
+                                  notiList.add(res);
+                                });
+                                // notiList.add(res);
+                              }
                             },
                             child: Row(
                               children: [
@@ -164,21 +179,26 @@ class _AlarmState extends State<Alarm> {
                           )
                         ]),
                   )),
-              Expanded(
-                  child: Container(
-                alignment: Alignment.center,
-                child: Text(
-                  "ยังไม่มีการเตือนความจำ",
-                  style: GoogleFonts.prompt(
-                    textStyle: TextStyle(
-                        letterSpacing: .39,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xffAFAFAF)),
-                  ),
-                ),
-                //color: Colors.red,
-              ))
+              notiList.length == 0
+                  ? Text(
+                      "ยังไม่มีการเตือนความจำ",
+                      style: GoogleFonts.prompt(
+                        textStyle: TextStyle(
+                            letterSpacing: .39,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xffAFAFAF)),
+                      ),
+                    )
+                  : Container(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                  child: ListView.builder(
+                      itemCount: notiList.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          ListTile(
+                        title: Text('${notiList[index]}'),
+                      ),
+                    ))
             ],
           ),
         ));

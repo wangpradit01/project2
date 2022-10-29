@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class ConsumtionScreen extends StatefulWidget {
   const ConsumtionScreen({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
               color: Colors.white,
               child: Center(
                 child: Text(
-                  "วันที่ 08 กันยายน 2565",
+                  DateFormat('วันที่ dd/MM/yyyy').format(DateTime.now()),
                   style: GoogleFonts.prompt(
                     textStyle: const TextStyle(
                         letterSpacing: 0.66,
