@@ -334,7 +334,7 @@ final List<Map<String, dynamic>> foods = [
     "food_cal": 68.1,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "https://cms.dmpcdn.com/food/2021/08/26/cdc7c450-0634-11ec-8147-2f4916a797d2_original.jpg"
   },
    {
     "id": 18,
@@ -351,7 +351,7 @@ final List<Map<String, dynamic>> foods = [
    {
     "id": 19,
     "food_name": "มะละกอ",
-    "food_carb": 6 ,
+    "food_carb": 6.0 ,
     "food_detail": "ชิ้นคำ",
     "food_protein": 0.47,
     "food_proteindetail": "กรัม",
@@ -447,87 +447,87 @@ final List<Map<String, dynamic>> foods = [
    {
     "id": 27,
     "food_name": "เส้นก๋วยเตี๋ยว(เส้นบะหมี่)",
-    "food_carb": 1 ,
+    "food_carb": 1.0 ,
     "food_detail": "ทัพพี",
-    "food_protein": 2.0,
+    "food_protein": 4.5,
     "food_proteindetail": "กรัม",
     "food_cal": 280.0,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "https://img.kapook.com/u/surauch/cook1/BaMhee-1.jpg"
   },
    {
     "id": 28,
-    "food_name": "แก้วมังกร",
-    "food_carb": 1 ,
-    "food_detail": "ลูก",
-    "food_protein": 2.0,
+    "food_name": "เส้นก๋วยเตี๋ยว(เส้นเล็ก)",
+    "food_carb": 1.0 ,
+    "food_detail": "ทัพพี",
+    "food_protein": 1.8,
     "food_proteindetail": "กรัม",
-    "food_cal": 66,
+    "food_cal": 108.0,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "https://s3.theasianparent.com/cdn-cgi/image/width=700,quality=95/tap-assets-prod/wp-content/uploads/sites/25/2022/01/rice-noodle.jpg"
   },
    {
     "id": 29,
-    "food_name": "แก้วมังกร",
-    "food_carb": 1 ,
-    "food_detail": "ลูก",
-    "food_protein": 2.0,
+    "food_name": "เส้นก๋วยเตี๋ยว(เส้นหมี่)",
+    "food_carb": 1.0 ,
+    "food_detail": "ทัพพี",
+    "food_protein": 7.0,
     "food_proteindetail": "กรัม",
-    "food_cal": 66,
+    "food_cal": 370.0,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "https://img.wongnai.com/p/1920x0/2021/07/10/04672818b7c04db6a7b606e240cde904.jpg"
   },
    {
     "id": 30,
-    "food_name": "แก้วมังกร",
-    "food_carb": 1 ,
-    "food_detail": "ลูก",
-    "food_protein": 2.0,
+    "food_name": "เส้นก๋วยเตี๋ยว(เส้นใหญ่)",
+    "food_carb": 1.0 ,
+    "food_detail": "ทัพพี",
+    "food_protein": 2.5,
     "food_proteindetail": "กรัม",
-    "food_cal": 66,
+    "food_cal": 120.0,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "https://t1.blockdit.com/photos/2021/05/6097d7c8f931950c68356d1a_800x0xcover_K8VYhlc0.jpg"
   },
    {
     "id": 31,
-    "food_name": "แก้วมังกร",
-    "food_carb": 1 ,
-    "food_detail": "ลูก",
-    "food_protein": 2.0,
+    "food_name": "เส้นขนมจีน",
+    "food_carb": 1.0 ,
+    "food_detail": "ทัพพี",
+    "food_protein": 0.9,
     "food_proteindetail": "กรัม",
-    "food_cal": 66,
+    "food_cal": 77.0,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "https://s359.kapook.com/pagebuilder/01260069-813b-4aec-9899-e8da6876d993.jpg"
   },
    {
     "id": 32,
-    "food_name": "แก้วมังกร",
-    "food_carb": 1 ,
+    "food_name": "แอปเปิ้ลเขียว",
+    "food_carb": 1.0 ,
     "food_detail": "ลูก",
-    "food_protein": 2.0,
+    "food_protein": 0.0,
     "food_proteindetail": "กรัม",
-    "food_cal": 66,
+    "food_cal": 30.0,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
+        "http://www.healthandtrend.com/wp-content/uploads/2017/02/Applene-3.jpg"
   },
    {
     "id": 33,
-    "food_name": "แก้วมังกร",
-    "food_carb": 1 ,
+    "food_name": "แอปเปิ้ลลูกใหญ่",
+    "food_carb": 0.5 ,
     "food_detail": "ลูก",
-    "food_protein": 2.0,
+    "food_protein": 0.3,
     "food_proteindetail": "กรัม",
-    "food_cal": 66,
+    "food_cal": 84.1,
     "food_caldetail": "กิโลแคลโลรี",
     "food_img":
-        "https://s.isanook.com/he/0/ud/2/13057/13057-thumbnail.jpg"
-  },
+       "https://www.samunpri.com/wp-content/uploads/2018/12/Malus-domestica.jpg" 
+        },
    {
     "id": 34,
     "food_name": "แก้วมังกร",
