@@ -35,7 +35,9 @@ class _FoodDataState extends State<FoodData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF3F3F3),
       appBar: AppBar(
+          centerTitle: true,
           title: Text(
             '${widget.foodTitle}',
             style: GoogleFonts.prompt(
@@ -50,16 +52,34 @@ class _FoodDataState extends State<FoodData> {
       body: ListView(
         shrinkWrap: false,
         children: [
-          Image.network(
-            '${widget.foodImage}',
-            
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(1, 3),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      color: Colors.grey.withOpacity(0.5))
+                ],
+              ),
+              padding: EdgeInsets.all(8),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  '${widget.foodImage}',
+                ),
+              ),
+            ),
           ),
           SizedBox(
             height: 35,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            
             children: [
               Row(
                 children: [
@@ -76,15 +96,17 @@ class _FoodDataState extends State<FoodData> {
                           color: Colors.black),
                     ),
                   ),
-                  SizedBox(width: 15,),
+                  SizedBox(
+                    width: 15,
+                  ),
                   Text(
                     '${widget.foodCarb}',
                     style: GoogleFonts.prompt(
-                  textStyle: const TextStyle(
-                      letterSpacing: .54,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      textStyle: const TextStyle(
+                          letterSpacing: .54,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
                     ),
                   ),
                   SizedBox(
@@ -93,33 +115,37 @@ class _FoodDataState extends State<FoodData> {
                   Text(
                     '${widget.foodDetail}',
                     style: GoogleFonts.prompt(
-                  textStyle: const TextStyle(
-                      letterSpacing: .54,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      textStyle: const TextStyle(
+                          letterSpacing: .54,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
                     ),
                   )
-                  
                 ],
               ),
-              SizedBox(height: 20,),
-              Row(
-               
-                children: [
-                  SizedBox(width: 20,),
-                  Text(
-                'ปริมาณโปรตีน : ',
-                style: GoogleFonts.prompt(
-                  textStyle: const TextStyle(
-                      letterSpacing: .54,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
+              SizedBox(
+                height: 20,
               ),
-              SizedBox(width: 15,),
-              Text(
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'ปริมาณโปรตีน : ',
+                    style: GoogleFonts.prompt(
+                      textStyle: const TextStyle(
+                          letterSpacing: .54,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
                     '${widget.foodProtein}',
                     style: GoogleFonts.prompt(
                       textStyle: const TextStyle(
@@ -129,7 +155,9 @@ class _FoodDataState extends State<FoodData> {
                           color: Colors.black),
                     ),
                   ),
-                  SizedBox(width: 15,),
+                  SizedBox(
+                    width: 15,
+                  ),
                   Text(
                     '${widget.foodProteinDetail}',
                     style: GoogleFonts.prompt(
@@ -142,23 +170,28 @@ class _FoodDataState extends State<FoodData> {
                   ),
                 ],
               ),
-              SizedBox(height: 20,),
-              Row(
-               
-                children: [
-                  SizedBox(width: 20,),
-                  Text(
-                'ปริมาณแคลโลรี : ',
-                style: GoogleFonts.prompt(
-                  textStyle: const TextStyle(
-                      letterSpacing: .54,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
+              SizedBox(
+                height: 20,
               ),
-              SizedBox(width: 15,),
-              Text(
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'ปริมาณแคลโลรี : ',
+                    style: GoogleFonts.prompt(
+                      textStyle: const TextStyle(
+                          letterSpacing: .54,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
                     '${widget.foodCal}',
                     style: GoogleFonts.prompt(
                       textStyle: const TextStyle(
@@ -168,7 +201,9 @@ class _FoodDataState extends State<FoodData> {
                           color: Colors.black),
                     ),
                   ),
-                  SizedBox(width: 15,),
+                  SizedBox(
+                    width: 15,
+                  ),
                   Text(
                     '${widget.foodCalDetail}',
                     style: GoogleFonts.prompt(
@@ -181,7 +216,6 @@ class _FoodDataState extends State<FoodData> {
                   ),
                 ],
               ),
-              
             ],
           ),
         ],

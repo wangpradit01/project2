@@ -1,4 +1,4 @@
-import 'package:baowan/detailprofile.dart';
+import 'package:baowan/Profile/detailprofile.dart';
 import 'package:baowan/tapmanu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -58,10 +58,10 @@ class _SettingState extends State<Setting> {
             child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
-                  Navigator.push(context,
-                        MaterialPageRoute(
-                          builder: (context) => const DetailProfile()
-                        ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DetailProfile()));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
@@ -69,7 +69,6 @@ class _SettingState extends State<Setting> {
                   decoration: BoxDecoration(
                     // borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
-                    
                   ),
                   child: Row(
                     children: [
@@ -94,15 +93,8 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                       ),
-                     
                       Icon(Icons.arrow_forward_ios_outlined,
-                      size: 20,
-                      color: Color(0xff757575)),
-                      
-                      
-                      
-                      
-                      
+                          size: 20, color: Color(0xff757575)),
                     ],
                   ),
                 )),
@@ -144,17 +136,20 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                       ),
-                      
-                      IconButton(onPressed: (() {
-                        Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => DetailProfile()),);
-                      }), 
-                      icon: Icon(Icons.arrow_forward_ios_outlined),
-                      iconSize: 20,
-                      color: Color(0xff757575),)
-                      
-                      
-                      
+
+                      IconButton(
+                        onPressed: (() {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailProfile()),
+                          );
+                        }),
+                        icon: Icon(Icons.arrow_forward_ios_outlined),
+                        iconSize: 20,
+                        color: Color(0xff757575),
+                      )
+
                       // Icon(
                       //   Icons.arrow_forward_ios_outlined,
                       //   size: 20,
@@ -201,15 +196,18 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                       ),
-                       IconButton(onPressed: (() {
-                        Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => DetailProfile()),);
-                      }), 
-                      icon: Icon(Icons.arrow_forward_ios_outlined),
-                      iconSize: 20,
-                      color: Color(0xff757575),)
-                      
-                      
+                      IconButton(
+                        onPressed: (() {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailProfile()),
+                          );
+                        }),
+                        icon: Icon(Icons.arrow_forward_ios_outlined),
+                        iconSize: 20,
+                        color: Color(0xff757575),
+                      )
                     ],
                   ),
                 )),

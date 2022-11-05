@@ -7,10 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:baowan/regis.dart';
 
 void main() async {
-
-
   SupabaseService.init();
-  
+
   SupabaseService.getFood();
   SupabaseService.addFood();
   runApp(const MyApp());
@@ -27,9 +25,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Prompt',
       ),
       home: LoginPage(),
     );
   }
 }
-
