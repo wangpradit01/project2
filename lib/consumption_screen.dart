@@ -146,6 +146,7 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                             onTap: () async {
                                               await showModalBottomSheet<void>(
                                                 isScrollControlled: true,
+                                                isDismissible: false,
                                                 context: context,
                                                 builder:
                                                     (BuildContext context) {
@@ -176,23 +177,50 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                               0.8,
                                                       child: Column(
                                                         children: [
-                                                          Stack(
-                                                            children: [
-                                                              Text(
-                                                                "เลือกอาหารที่ทาน",
-                                                                style: GoogleFonts.prompt(
-                                                                    textStyle: const TextStyle(
-                                                                        letterSpacing:
-                                                                            0.66,
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        color: Colors
-                                                                            .black)),
-                                                              ),
-                                                            ],
+                                                          Container(
+                                                            width: double
+                                                                .maxFinite,
+                                                            child: Stack(
+                                                              children: [
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child: Text(
+                                                                    "เลือกอาหารที่ทาน",
+                                                                    style: GoogleFonts.prompt(
+                                                                        textStyle: const TextStyle(
+                                                                            letterSpacing:
+                                                                                0.66,
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            color: Colors.black)),
+                                                                  ),
+                                                                ),
+                                                                Positioned.fill(
+                                                                    child:
+                                                                        Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      foodProvider
+                                                                          .calFood(
+                                                                              1);
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .close),
+                                                                  ),
+                                                                ))
+                                                              ],
+                                                            ),
                                                           ),
                                                           SizedBox(
                                                             height: 15,
@@ -337,18 +365,39 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                                   0.8,
                                                               child: Column(
                                                                 children: [
-                                                                  Stack(
-                                                                    children: [
-                                                                      Text(
-                                                                        "เลือกอาหารที่ทาน",
-                                                                        style: GoogleFonts.prompt(
-                                                                            textStyle: const TextStyle(
-                                                                                letterSpacing: 0.66,
-                                                                                fontSize: 16,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                color: Colors.black)),
-                                                                      ),
-                                                                    ],
+                                                                  Container(
+                                                                    width: double
+                                                                        .maxFinite,
+                                                                    child:
+                                                                        Stack(
+                                                                      children: [
+                                                                        Align(
+                                                                          alignment:
+                                                                              Alignment.center,
+                                                                          child:
+                                                                              Text(
+                                                                            "เลือกอาหารที่ทาน",
+                                                                            style:
+                                                                                GoogleFonts.prompt(textStyle: const TextStyle(letterSpacing: 0.66, fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                                          ),
+                                                                        ),
+                                                                        Positioned.fill(
+                                                                            child: Align(
+                                                                          alignment:
+                                                                              Alignment.centerRight,
+                                                                          child:
+                                                                              GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              foodProvider.calFood(1);
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            child:
+                                                                                Icon(Icons.close),
+                                                                          ),
+                                                                        ))
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                   SizedBox(
                                                                     height: 15,
@@ -507,156 +556,173 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                         ))
                                   ],
                                 )),
-                            Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "สรุปผลโภชนาการ",
-                                      style: GoogleFonts.prompt(
-                                          textStyle: const TextStyle(
-                                              letterSpacing: 0.66,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.black)),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คาร์โบไฮเดรต",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                            Consumer<FoodProvider>(
+                              builder: (BuildContext context, value,
+                                      Widget? child) =>
+                                  Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "สรุปผลโภชนาการ",
+                                            style: GoogleFonts.prompt(
+                                                textStyle: const TextStyle(
+                                                    letterSpacing: 0.66,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black)),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คาร์โบไฮเดรต",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "โปรตีน",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value
+                                                            .breakfastNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "โปรตีน",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คอเรสเตอรอล",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value
+                                                            .breakfastNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คอเรสเตอรอล",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                )),
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value
+                                                            .breakfastNutrients!
+                                                            .totalCalories
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                            ),
                             const SizedBox(height: 20),
                             const Divider(
                               height: 10.0,
@@ -783,23 +849,50 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                               0.8,
                                                       child: Column(
                                                         children: [
-                                                          Stack(
-                                                            children: [
-                                                              Text(
-                                                                "เลือกอาหารที่ทาน",
-                                                                style: GoogleFonts.prompt(
-                                                                    textStyle: const TextStyle(
-                                                                        letterSpacing:
-                                                                            0.66,
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        color: Colors
-                                                                            .black)),
-                                                              ),
-                                                            ],
+                                                          Container(
+                                                            width: double
+                                                                .maxFinite,
+                                                            child: Stack(
+                                                              children: [
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child: Text(
+                                                                    "เลือกอาหารที่ทาน",
+                                                                    style: GoogleFonts.prompt(
+                                                                        textStyle: const TextStyle(
+                                                                            letterSpacing:
+                                                                                0.66,
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            color: Colors.black)),
+                                                                  ),
+                                                                ),
+                                                                Positioned.fill(
+                                                                    child:
+                                                                        Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      foodProvider
+                                                                          .calFood(
+                                                                              2);
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .close),
+                                                                  ),
+                                                                ))
+                                                              ],
+                                                            ),
                                                           ),
                                                           SizedBox(
                                                             height: 15,
@@ -939,21 +1032,48 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                               0.8,
                                                           child: Column(
                                                             children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Text(
-                                                                    "เลือกอาหารที่ทาน",
-                                                                    style: GoogleFonts.prompt(
-                                                                        textStyle: const TextStyle(
-                                                                            letterSpacing:
-                                                                                0.66,
-                                                                            fontSize:
-                                                                                16,
-                                                                            fontWeight:
-                                                                                FontWeight.w600,
-                                                                            color: Colors.black)),
-                                                                  ),
-                                                                ],
+                                                              Container(
+                                                                width: double
+                                                                    .maxFinite,
+                                                                child: Stack(
+                                                                  children: [
+                                                                    Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      child:
+                                                                          Text(
+                                                                        "เลือกอาหารที่ทาน",
+                                                                        style: GoogleFonts.prompt(
+                                                                            textStyle: const TextStyle(
+                                                                                letterSpacing: 0.66,
+                                                                                fontSize: 16,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                color: Colors.black)),
+                                                                      ),
+                                                                    ),
+                                                                    Positioned
+                                                                        .fill(
+                                                                            child:
+                                                                                Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .centerRight,
+                                                                      child:
+                                                                          GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          foodProvider
+                                                                              .calFood(2);
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        child: Icon(
+                                                                            Icons.close),
+                                                                      ),
+                                                                    ))
+                                                                  ],
+                                                                ),
                                                               ),
                                                               SizedBox(
                                                                 height: 15,
@@ -1105,156 +1225,168 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                         ))
                                   ],
                                 )),
-                            Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "สรุปผลโภชนาการ",
-                                      style: GoogleFonts.prompt(
-                                          textStyle: const TextStyle(
-                                              letterSpacing: 0.66,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.black)),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คาร์โบไฮเดรต",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                            Consumer<FoodProvider>(
+                              builder: (BuildContext context, value,
+                                      Widget? child) =>
+                                  Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "สรุปผลโภชนาการ",
+                                            style: GoogleFonts.prompt(
+                                                textStyle: const TextStyle(
+                                                    letterSpacing: 0.66,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black)),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คาร์โบไฮเดรต",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "โปรตีน",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value.lunchNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "โปรตีน",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คอเรสเตอรอล",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value.lunchNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คอเรสเตอรอล",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                )),
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value.lunchNutrients!
+                                                            .totalCalories
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                            ),
                             const SizedBox(height: 20),
                             const Divider(
                               height: 10.0,
@@ -1372,23 +1504,50 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                               0.8,
                                                       child: Column(
                                                         children: [
-                                                          Stack(
-                                                            children: [
-                                                              Text(
-                                                                "เลือกอาหารที่ทาน",
-                                                                style: GoogleFonts.prompt(
-                                                                    textStyle: const TextStyle(
-                                                                        letterSpacing:
-                                                                            0.66,
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        color: Colors
-                                                                            .black)),
-                                                              ),
-                                                            ],
+                                                          Container(
+                                                            width: double
+                                                                .maxFinite,
+                                                            child: Stack(
+                                                              children: [
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child: Text(
+                                                                    "เลือกอาหารที่ทาน",
+                                                                    style: GoogleFonts.prompt(
+                                                                        textStyle: const TextStyle(
+                                                                            letterSpacing:
+                                                                                0.66,
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            color: Colors.black)),
+                                                                  ),
+                                                                ),
+                                                                Positioned.fill(
+                                                                    child:
+                                                                        Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      foodProvider
+                                                                          .calFood(
+                                                                              3);
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .close),
+                                                                  ),
+                                                                ))
+                                                              ],
+                                                            ),
                                                           ),
                                                           SizedBox(
                                                             height: 15,
@@ -1528,21 +1687,48 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                               0.8,
                                                           child: Column(
                                                             children: [
-                                                              Stack(
-                                                                children: [
-                                                                  Text(
-                                                                    "เลือกอาหารที่ทาน",
-                                                                    style: GoogleFonts.prompt(
-                                                                        textStyle: const TextStyle(
-                                                                            letterSpacing:
-                                                                                0.66,
-                                                                            fontSize:
-                                                                                16,
-                                                                            fontWeight:
-                                                                                FontWeight.w600,
-                                                                            color: Colors.black)),
-                                                                  ),
-                                                                ],
+                                                              Container(
+                                                                width: double
+                                                                    .maxFinite,
+                                                                child: Stack(
+                                                                  children: [
+                                                                    Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      child:
+                                                                          Text(
+                                                                        "เลือกอาหารที่ทาน",
+                                                                        style: GoogleFonts.prompt(
+                                                                            textStyle: const TextStyle(
+                                                                                letterSpacing: 0.66,
+                                                                                fontSize: 16,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                color: Colors.black)),
+                                                                      ),
+                                                                    ),
+                                                                    Positioned
+                                                                        .fill(
+                                                                            child:
+                                                                                Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .centerRight,
+                                                                      child:
+                                                                          GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          foodProvider
+                                                                              .calFood(3);
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        child: Icon(
+                                                                            Icons.close),
+                                                                      ),
+                                                                    ))
+                                                                  ],
+                                                                ),
                                                               ),
                                                               SizedBox(
                                                                 height: 15,
@@ -1701,156 +1887,170 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                         ))
                                   ],
                                 )),
-                            Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "สรุปผลโภชนาการ",
-                                      style: GoogleFonts.prompt(
-                                          textStyle: const TextStyle(
-                                              letterSpacing: 0.66,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.black)),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คาร์โบไฮเดรต",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                            Consumer<FoodProvider>(
+                              builder: (BuildContext context, value,
+                                      Widget? child) =>
+                                  Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "สรุปผลโภชนาการ",
+                                            style: GoogleFonts.prompt(
+                                                textStyle: const TextStyle(
+                                                    letterSpacing: 0.66,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black)),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คาร์โบไฮเดรต",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "โปรตีน",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value.dinnerNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "โปรตีน",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คอเรสเตอรอล",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value.dinnerNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คอเรสเตอรอล",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                )),
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value.dinnerNutrients!
+                                                            .totalCalories
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                            ),
                             const SizedBox(height: 20),
                             const Divider(
                               height: 10.0,
@@ -1970,23 +2170,50 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                               0.8,
                                                       child: Column(
                                                         children: [
-                                                          Stack(
-                                                            children: [
-                                                              Text(
-                                                                "เลือกอาหารที่ทาน",
-                                                                style: GoogleFonts.prompt(
-                                                                    textStyle: const TextStyle(
-                                                                        letterSpacing:
-                                                                            0.66,
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        color: Colors
-                                                                            .black)),
-                                                              ),
-                                                            ],
+                                                          Container(
+                                                            width: double
+                                                                .maxFinite,
+                                                            child: Stack(
+                                                              children: [
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child: Text(
+                                                                    "เลือกอาหารที่ทาน",
+                                                                    style: GoogleFonts.prompt(
+                                                                        textStyle: const TextStyle(
+                                                                            letterSpacing:
+                                                                                0.66,
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.w600,
+                                                                            color: Colors.black)),
+                                                                  ),
+                                                                ),
+                                                                Positioned.fill(
+                                                                    child:
+                                                                        Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child:
+                                                                      GestureDetector(
+                                                                    onTap: () {
+                                                                      foodProvider
+                                                                          .calFood(
+                                                                              4);
+                                                                      Navigator.pop(
+                                                                          context);
+                                                                    },
+                                                                    child: Icon(
+                                                                        Icons
+                                                                            .close),
+                                                                  ),
+                                                                ))
+                                                              ],
+                                                            ),
                                                           ),
                                                           SizedBox(
                                                             height: 15,
@@ -2131,18 +2358,39 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                                                   0.8,
                                                               child: Column(
                                                                 children: [
-                                                                  Stack(
-                                                                    children: [
-                                                                      Text(
-                                                                        "เลือกอาหารที่ทาน",
-                                                                        style: GoogleFonts.prompt(
-                                                                            textStyle: const TextStyle(
-                                                                                letterSpacing: 0.66,
-                                                                                fontSize: 16,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                color: Colors.black)),
-                                                                      ),
-                                                                    ],
+                                                                  Container(
+                                                                    width: double
+                                                                        .maxFinite,
+                                                                    child:
+                                                                        Stack(
+                                                                      children: [
+                                                                        Align(
+                                                                          alignment:
+                                                                              Alignment.center,
+                                                                          child:
+                                                                              Text(
+                                                                            "เลือกอาหารที่ทาน",
+                                                                            style:
+                                                                                GoogleFonts.prompt(textStyle: const TextStyle(letterSpacing: 0.66, fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                                          ),
+                                                                        ),
+                                                                        Positioned.fill(
+                                                                            child: Align(
+                                                                          alignment:
+                                                                              Alignment.centerRight,
+                                                                          child:
+                                                                              GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              foodProvider.calFood(4);
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            child:
+                                                                                Icon(Icons.close),
+                                                                          ),
+                                                                        ))
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                   SizedBox(
                                                                     height: 15,
@@ -2301,156 +2549,173 @@ class _ConsumtionScreenState extends State<ConsumtionScreen> {
                                         ))
                                   ],
                                 )),
-                            Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "สรุปผลโภชนาการ",
-                                      style: GoogleFonts.prompt(
-                                          textStyle: const TextStyle(
-                                              letterSpacing: 0.66,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.black)),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คาร์โบไฮเดรต",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                            Consumer<FoodProvider>(
+                              builder: (BuildContext context, value,
+                                      Widget? child) =>
+                                  Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "สรุปผลโภชนาการ",
+                                            style: GoogleFonts.prompt(
+                                                textStyle: const TextStyle(
+                                                    letterSpacing: 0.66,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black)),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คาร์โบไฮเดรต",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "โปรตีน",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value
+                                                            .beforeBedNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "โปรตีน",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              "คอเรสเตอรอล",
-                                              style: GoogleFonts.prompt(
-                                                  textStyle: const TextStyle(
-                                                      letterSpacing: 0.66,
-                                                      fontSize: 16,
-                                                      color: Colors.black54)),
-                                            ),
-                                            SizedBox(
-                                                height: 40.0,
-                                                width: 100.0,
-                                                child: TextField(
-                                                  textAlignVertical:
-                                                      TextAlignVertical.center,
-                                                  style: GoogleFonts.prompt(
-                                                    textStyle: const TextStyle(
-                                                        letterSpacing: 0.66,
-                                                        fontSize: 16,
-                                                        color: Colors.black54),
-                                                  ),
-                                                  decoration: const InputDecoration(
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value
+                                                            .beforeBedNutrients!
+                                                            .totalProtein
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "คอเรสเตอรอล",
+                                                      style: GoogleFonts.prompt(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  letterSpacing:
+                                                                      0.66,
+                                                                  fontSize: 16,
+                                                                  color: Colors
+                                                                      .black54)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 8,
+                                                              horizontal: 12),
+                                                      width: double.maxFinite,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
                                                           borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0))),
-                                                      contentPadding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10.0,
-                                                              0.0,
-                                                              10.0,
-                                                              0.0),
-                                                      hintText: "0"),
-                                                ))
-                                          ],
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                )),
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.blue)),
+                                                      child: Text(
+                                                        value
+                                                            .beforeBedNutrients!
+                                                            .totalCalories
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                            ),
                             const SizedBox(height: 50),
                           ],
                         ))))
