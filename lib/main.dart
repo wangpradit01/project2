@@ -14,9 +14,9 @@ void main() async {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRzaXBha3NycGZubHFpdmJoem1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAxNTg3NjksImV4cCI6MTk4NTczNDc2OX0.XdyOttthXWZQA4zXYm4uDTIQ-EeZpF9Vg3xKb-SNa5M',
   );
   await SupabaseService.init();
-  await SupabaseService.getHistory();
   await SupabaseService.getFood();
   await SupabaseService.getCarb();
+  await SupabaseService.getProfile();
   // SupabaseService.addFood();
   runApp(const MyApp());
 }

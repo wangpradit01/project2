@@ -1,3 +1,4 @@
+import 'package:baowan/Data/GlobalVar.dart';
 import 'package:baowan/Profile/EditProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -13,14 +14,6 @@ class DetailProfile extends StatefulWidget {
 }
 
 class _DetailProfileState extends State<DetailProfile> {
-  Map<String, dynamic> json = {
-    "name": "โอ๊ตซี่",
-    "surname": "ห้าแยก",
-    "email": "Oatzy@gmail.com",
-    "birth": "01/12/1995",
-    "gender": "ชาย",
-    "type": "เบาหวาน007"
-  };
   @override
   void initState() {
     // TODO: implement initState
@@ -76,13 +69,13 @@ class _DetailProfileState extends State<DetailProfile> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => EditProfile(
-                          data: json,
+                          data: profile,
                         ),
                       ),
                     );
-                    setState(() {
-                      json = res;
-                    });
+                    // setState(() {
+                    //   json = res;
+                    // });
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 24, bottom: 20),
@@ -125,8 +118,8 @@ class _DetailProfileState extends State<DetailProfile> {
                 width: 120,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    'https://i.ytimg.com/vi/IcXmB23SsZg/maxresdefault.jpg',
+                  child: Image.asset(
+                    'assets/image/woman3x.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -167,7 +160,7 @@ class _DetailProfileState extends State<DetailProfile> {
               bottom: 10,
             ),
             child: Text(
-              '${json['name']} ${json['surname']}',
+              '${profile!.name}',
               style: TextStyle(
                 color: Color(0xff2D2D2D),
                 fontWeight: FontWeight.w600,
@@ -208,7 +201,7 @@ class _DetailProfileState extends State<DetailProfile> {
               bottom: 10,
             ),
             child: Text(
-              '${json['email']}',
+              '${profile!.email}',
               style: TextStyle(
                 color: Color(0xff2D2D2D),
                 fontWeight: FontWeight.w600,
@@ -249,7 +242,7 @@ class _DetailProfileState extends State<DetailProfile> {
               bottom: 10,
             ),
             child: Text(
-              '${json['birth']}',
+              '${profile!.birth}',
               style: TextStyle(
                 color: Color(0xff2D2D2D),
                 fontWeight: FontWeight.w600,
@@ -290,7 +283,7 @@ class _DetailProfileState extends State<DetailProfile> {
               bottom: 10,
             ),
             child: Text(
-              '${json['gender']}',
+              profile!.gender == 0 ? "ชาย" : "หญิง",
               style: TextStyle(
                 color: Color(0xff2D2D2D),
                 fontWeight: FontWeight.w600,
@@ -300,47 +293,47 @@ class _DetailProfileState extends State<DetailProfile> {
           const Divider(
             thickness: 1,
           ),
-          Container(
-            padding: const EdgeInsets.only(left: 20.0),
-            margin: EdgeInsets.only(top: 10),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.bloodtype,
-                  color: Color(0xff757575),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'ประเภทเบาหวาน',
-                  style: TextStyle(
-                    color: Color(0xff757575),
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 55.0,
-              bottom: 10,
-            ),
-            child: Text(
-              '${json['type']}',
-              style: TextStyle(
-                color: Color(0xff2D2D2D),
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          const Divider(
-            thickness: 1,
-          ),
+          // Container(
+          //   padding: const EdgeInsets.only(left: 20.0),
+          //   margin: EdgeInsets.only(top: 10),
+          //   child: Row(
+          //     children: [
+          //       Icon(
+          //         Icons.bloodtype,
+          //         color: Color(0xff757575),
+          //       ),
+          //       SizedBox(
+          //         width: 10,
+          //       ),
+          //       Text(
+          //         'ประเภทเบาหวาน',
+          //         style: TextStyle(
+          //           color: Color(0xff757575),
+          //           fontWeight: FontWeight.w600,
+          //         ),
+          //       )
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     left: 55.0,
+          //     bottom: 10,
+          //   ),
+          //   child: Text(
+          //     '${json['type']}',
+          //     style: TextStyle(
+          //       color: Color(0xff2D2D2D),
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //   ),
+          // ),
+          // const Divider(
+          //   thickness: 1,
+          // ),
           SizedBox(
             height: 80,
           )

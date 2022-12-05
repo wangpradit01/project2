@@ -1,6 +1,7 @@
 import 'package:baowan/forgetpassword.dart';
-import 'package:baowan/profile.dart';
+import 'package:baowan/HomePage.dart';
 import 'package:baowan/regis.dart';
+import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +27,8 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             margin: EdgeInsets.only(top: 15, bottom: 50),
             padding: EdgeInsets.only(left: 35),
-            //left,right เป็นตำแน่งความข้างจากด้านซ้ายตัวแรก,ความข้างจากด้านขวาของอันหลัง
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -89,11 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                       style: GoogleFonts.prompt(
                         color: Colors.grey[600],
                         textStyle: const TextStyle(
-                          
-                            letterSpacing: .30,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            ),
+                          letterSpacing: .30,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -121,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 18.0),
                       child: TextField(
+                          controller: email,
                           decoration: InputDecoration(
                               border: InputBorder.none, hintText: "Email"),
                           style: GoogleFonts.prompt(
@@ -155,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 18.0),
                       child: TextField(
+                          controller: password,
                           obscureText: true,
                           decoration: InputDecoration(
                               border: InputBorder.none, hintText: "Password"),
@@ -164,8 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
-                          )
-                          ),
+                          )),
                     ),
                   )
                 ],
@@ -190,21 +191,48 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text(
                   "เข้าสู่ระบบ",
                   style: GoogleFonts.prompt(
-                    textStyle:  TextStyle(
+                    textStyle: TextStyle(
                         letterSpacing: .39,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white),
                   ),
-                  
                 ),
-                onPressed: () {
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Profile()),);
+                onPressed: () async {
+                  bool? res =
+                      await SupabaseService.login(email.text, password.text);
+                  if (res == true) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  } else {
+                    showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('เข้าสู่ระบบไม่สำเร็จ'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: const <Widget>[
+                                Text('กรุณาตรวจสอบอีเมล และรหัสผ่านให้ถูกต้อง'),
+                              ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              child: const Text('ปิด'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
                 },
-                
-                
-                
               ),
             ),
           ),
@@ -221,23 +249,25 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     children: [
                       TextButton(
-                      child:  Text(
-                        "ลืมรหัสผ่าน",
-                        style: GoogleFonts.prompt(
-                          color: Colors.grey[600],
-                          textStyle: const TextStyle(
-                            letterSpacing: .42,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                        child: Text(
+                          "ลืมรหัสผ่าน",
+                          style: GoogleFonts.prompt(
+                            color: Colors.grey[600],
+                            textStyle: const TextStyle(
+                              letterSpacing: .42,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ForgetPassword()),
-                        );
-                      },
-                      ) 
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForgetPassword()),
+                          );
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -249,20 +279,22 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   children: [
                     TextButton(
-                      child: Text("สมัครสมาชิก",
-                      style: GoogleFonts.prompt(
-                        textStyle: const TextStyle(
-                            letterSpacing: .42,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.blue),
-                      ),),
-                     onPressed: () {
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Regis()),
-                        );
-                     }
-                     )
+                        child: Text(
+                          "สมัครสมาชิก",
+                          style: GoogleFonts.prompt(
+                            textStyle: const TextStyle(
+                                letterSpacing: .42,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.blue),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Regis()),
+                          );
+                        })
                   ],
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:baowan/Data/FoodList.dart';
+import 'package:baowan/Data/GlobalVar.dart';
 import 'package:baowan/Data/NutrientModel.dart';
 import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/material.dart';
@@ -174,7 +175,7 @@ class FoodProvider with ChangeNotifier {
       "lunch_total_nutrient": lunchNutrients!.toJson(),
       "dinner_total_nutrient": dinnerNutrients!.toJson(),
       "before_bed_total_nutrient": beforeBedNutrients!.toJson(),
-      "user_id": 1,
+      "user_id": profile!.id,
       "breakfast_blood_sugar": double.parse(bsBreakfast),
       "lunch_blood_sugar": double.parse(bsLunch),
       "dinner_blood_sugar": double.parse(bsDinner),

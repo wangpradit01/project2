@@ -10,14 +10,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:localstorage/localstorage.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _ProfileState extends State<Profile> {
+class _HomePageState extends State<HomePage> {
   var date_list = [];
   bool isLoading = true;
   @override

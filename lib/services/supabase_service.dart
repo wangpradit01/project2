@@ -1,4 +1,6 @@
 import 'package:baowan/Data/FoodList.dart';
+import 'package:baowan/Data/GlobalVar.dart';
+import 'package:baowan/Data/ProfileModel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {
@@ -13,8 +15,32 @@ class SupabaseService {
   }
 
   static getHistory() async {
-    final res = await client!.from('baowan_data').select().execute();
+    final res = await client!
+        .from('baowan_data')
+        .select()
+        .filter('user_id', 'eq', profile!.id)
+        .execute();
     return res.data;
+  }
+
+  static getProfile() async {
+    final res = await client!.from('profile').select().execute();
+    print(res.data);
+    return res.data;
+  }
+
+  static Future<bool?> login(String email, String password) async {
+    final res = await client!
+        .from('profile')
+        .select()
+        .match({'email': email, 'password': password}).execute();
+    if (res.data.length == 0) {
+      return false;
+    }
+    if (res.data.length > 0) {
+      profile = Profile.fromJson(res.data[0]);
+      return true;
+    }
   }
 
   static getFood() async {

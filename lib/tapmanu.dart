@@ -1,5 +1,5 @@
 import 'package:baowan/alarm.dart';
-import 'package:baowan/profile.dart';
+import 'package:baowan/HomePage.dart';
 import 'package:baowan/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -61,7 +61,7 @@ class _BottomNavigationBar1State extends State<BottomNavigationBar1> {
                         });
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => Profile()),
+                          MaterialPageRoute(builder: (context) => HomePage()),
                         );
                       }),
                   IconBottomBar(
