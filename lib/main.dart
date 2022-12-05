@@ -1,13 +1,23 @@
 import 'package:baowan/Provider/FoodProvider.dart';
+import 'package:baowan/Provider/HistoryProvider.dart';
 import 'package:baowan/login.dart';
 import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
-  SupabaseService.init();
-  SupabaseService.getFood();
-  SupabaseService.addFood();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://tsipaksrpfnlqivbhzmn.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRzaXBha3NycGZubHFpdmJoem1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAxNTg3NjksImV4cCI6MTk4NTczNDc2OX0.XdyOttthXWZQA4zXYm4uDTIQ-EeZpF9Vg3xKb-SNa5M',
+  );
+  await SupabaseService.init();
+  await SupabaseService.getHistory();
+  await SupabaseService.getFood();
+  await SupabaseService.getCarb();
+  // SupabaseService.addFood();
   runApp(const MyApp());
 }
 
@@ -21,6 +31,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<FoodProvider>(
             create: (context) => FoodProvider()),
+        ChangeNotifierProvider<HistoryProvider>(
+            create: (context) => HistoryProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

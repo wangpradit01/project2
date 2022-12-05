@@ -17,7 +17,7 @@ class Food extends StatefulWidget {
 
 class _FoodState extends State<Food> {
   TextEditingController? _textEditingController = TextEditingController();
-  List<Map<String, dynamic>> searchFood = [];
+  List<dynamic> searchFood = [];
   @override
   void initState() {
     setState(() {
@@ -108,12 +108,12 @@ class _FoodState extends State<Food> {
                       foodTitle: searchFood[index]['food_name'],
                       foodDetail: searchFood[index]['food_detail'],
                       foodProteinDetail: searchFood[index]
-                          ['food_proteindetail'],
+                          ['food_protein_detail'],
                       foodImage: searchFood[index]['food_img'],
                       foodCal: searchFood[index]['food_cal'],
                       foodCarb: searchFood[index]['food_carb'],
                       foodProtein: searchFood[index]['food_protein'],
-                      foodCalDetail: searchFood[index]['food_caldetail'],
+                      foodCalDetail: searchFood[index]['food_cal_detail'],
                     ),
                   )),
               title: Text(

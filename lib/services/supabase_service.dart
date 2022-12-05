@@ -1,43 +1,34 @@
+import 'package:baowan/Data/FoodList.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {
+  String supabaseUrl = "https://tsipaksrpfnlqivbhzmn.supabase.co";
+  String supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRzaXBha3NycGZubHFpdmJoem1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzAxNTg3NjksImV4cCI6MTk4NTczNDc2OX0.XdyOttthXWZQA4zXYm4uDTIQ-EeZpF9Vg3xKb-SNa5M";
 
-  String supabaseUrl = "https://whclnudmfkhwsdzofyuo.supabase.co";
-  String supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoY2xudWRtZmtod3Nkem9meXVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjQ4OTI3MTAsImV4cCI6MTk4MDQ2ODcxMH0.hKiCcw2gzr0LjO3T_E_qCbWcqqBy6u-Zn_QO1ERyMT4";
+  static SupabaseClient? client;
 
-static SupabaseClient? client;
-SupabaseService.init() {
-  client = SupabaseClient(supabaseUrl, supabaseKey);
-}
+  SupabaseService.init() {
+    client = SupabaseClient(supabaseUrl, supabaseKey);
+  }
 
+  static getHistory() async {
+    final res = await client!.from('baowan_data').select().execute();
+    return res.data;
+  }
 
-static getFood() async {
+  static getFood() async {
+    final res = await client!.from('food').select().execute();
+    foods = res.data;
+  }
 
- final res  = await client!.from('Food').select('*').execute();
+  static getCarb() async {
+    final res = await client!.from('carb').select().execute();
+    carbs = res.data;
+  }
 
-
- print(res.data);
-}
-
-
-static addFood() async {
-
-
-  final res = await client!.from('Food').insert({
-
-
-    "name" : "TEST2",
-    "carb" : 0,
-    "protein" : 0,
-    "cal" : 0,
-  }).execute();
-
-
-  print(res.status);
-}
-
-
-
-
-
+  static addData(var payload) async {
+    final res = await client!.from('baowan_data').insert(payload).execute();
+    print(res.status);
+  }
 }
