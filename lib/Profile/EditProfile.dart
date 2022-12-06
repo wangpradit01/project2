@@ -1,3 +1,5 @@
+import 'package:baowan/Data/ProfileModel.dart';
+import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -6,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class EditProfile extends StatefulWidget {
-  final data;
+  final Profile data;
   const EditProfile({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -17,19 +19,21 @@ class _EditProfileState extends State<EditProfile> {
   bool isSelectedMale = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController surnameController = TextEditingController();
   TextEditingController birthController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController typeController = TextEditingController();
+
+  bool isUpdating = false;
   @override
   void initState() {
-    emailController = TextEditingController(text: '${widget.data['email']}');
-    nameController = TextEditingController(text: '${widget.data['name']}');
-    surnameController =
-        TextEditingController(text: '${widget.data['surname']}');
-    birthController = TextEditingController(text: '${widget.data['birth']}');
-    genderController = TextEditingController(text: '${widget.data['gender']}');
-    typeController = TextEditingController(text: '${widget.data['type']}');
+    emailController = TextEditingController(text: '${widget.data.email}');
+    nameController = TextEditingController(text: '${widget.data.name}');
+    birthController = TextEditingController(text: '${widget.data.birth}');
+    setState(() {
+      if (widget.data.gender == 0) {
+        isSelectedMale = true;
+      } else {
+        isSelectedMale = false;
+      }
+    });
     super.initState();
   }
 
@@ -37,10 +41,8 @@ class _EditProfileState extends State<EditProfile> {
   void dispose() {
     emailController.dispose();
     nameController.dispose();
-    surnameController.dispose();
     birthController.dispose();
-    genderController.dispose();
-    typeController.dispose();
+
     super.dispose();
   }
 
@@ -50,7 +52,7 @@ class _EditProfileState extends State<EditProfile> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leadingWidth: 80,
+        leadingWidth: 100,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
           behavior: HitTestBehavior.translucent,
@@ -64,7 +66,7 @@ class _EditProfileState extends State<EditProfile> {
                 style: TextStyle(
                   color: Color(0xff757575),
                   fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                  fontSize: 15,
                 ),
               ),
             ],
@@ -81,14 +83,48 @@ class _EditProfileState extends State<EditProfile> {
         ),
         actions: [
           GestureDetector(
-            onTap: () => Navigator.pop(context, {
-              "name": "${nameController.value.text}",
-              "surname": "${surnameController.value.text}",
-              "email": "${emailController.value.text}",
-              "birth": "${birthController.value.text}",
-              "gender": "${genderController.value.text}",
-              "type": "${typeController.value.text}"
-            }),
+            onTap: () async {
+              setState(() {
+                isUpdating = true;
+                showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 80),
+                      child: AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Please wait',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              });
+              await SupabaseService.updateProfile(
+                  name: nameController.text,
+                  email: emailController.text,
+                  isMale: isSelectedMale,
+                  birth: DateTime.parse(birthController.text));
+              setState(() {
+                isUpdating = false;
+                Navigator.pop(context);
+              });
+              Navigator.pop(context, true);
+            },
             behavior: HitTestBehavior.translucent,
             child: Padding(
               padding: const EdgeInsets.only(right: 20.0),
@@ -102,7 +138,7 @@ class _EditProfileState extends State<EditProfile> {
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.w600,
-                      fontSize: 12,
+                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -124,38 +160,14 @@ class _EditProfileState extends State<EditProfile> {
           Stack(
             alignment: Alignment.center,
             children: [
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () => null,
-                child: SizedBox(
-                  height: 120,
-                  width: 120,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        Image.network(
-                          'https://i.ytimg.com/vi/IcXmB23SsZg/maxresdefault.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                        Positioned(
-                          bottom: 5,
-                          right: 5,
-                          child: Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                                color: Colors.blue, shape: BoxShape.circle),
-                            child: Icon(
-                              Icons.photo_camera,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+              Container(
+                height: 120,
+                width: 120,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'assets/image/woman3x.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -231,36 +243,6 @@ class _EditProfileState extends State<EditProfile> {
                     height: 15,
                   ),
                   Text(
-                    'นามสกุล',
-                    style: TextStyle(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xffF3F3F3),
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    child: TextFormField(
-                      controller: surnameController,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: Color(0xffD9D9D9),
-                            ),
-                          )),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
                     'วันเกิด',
                     style: TextStyle(
                       color: Color(0xff2D2D2D),
@@ -278,7 +260,7 @@ class _EditProfileState extends State<EditProfile> {
                     child: TextFormField(
                       controller: birthController,
                       onTap: () async {
-                        DateTime? birthDate = DateFormat("dd/MM/yyyy")
+                        DateTime? birthDate = DateFormat("yyyy-MM-dd")
                             .parse(birthController.value.text);
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
@@ -286,7 +268,7 @@ class _EditProfileState extends State<EditProfile> {
                             firstDate: DateTime(1950),
                             lastDate: DateTime(2101));
                         birthController.text =
-                            DateFormat('dd/MM/yyyy').format(pickedDate!);
+                            DateFormat('yyyy-MM-dd').format(pickedDate!);
                       },
                       readOnly: true,
                       decoration: InputDecoration(
@@ -327,7 +309,6 @@ class _EditProfileState extends State<EditProfile> {
                             onTap: () {
                               setState(() {
                                 isSelectedMale = true;
-                                genderController.text = 'ชาย';
                               });
                             },
                             child: Container(
@@ -358,7 +339,6 @@ class _EditProfileState extends State<EditProfile> {
                             onTap: () {
                               setState(() {
                                 isSelectedMale = false;
-                                genderController.text = 'หญิง';
                               });
                             },
                             child: Container(
@@ -384,36 +364,6 @@ class _EditProfileState extends State<EditProfile> {
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'ชนิดเบาหวาน',
-                    style: TextStyle(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xffF3F3F3),
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    child: TextFormField(
-                      controller: typeController,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color: Color(0xffD9D9D9),
-                            ),
-                          )),
                     ),
                   ),
                   SizedBox(

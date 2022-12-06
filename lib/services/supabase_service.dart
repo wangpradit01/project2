@@ -1,6 +1,7 @@
 import 'package:baowan/Data/FoodList.dart';
 import 'package:baowan/Data/GlobalVar.dart';
 import 'package:baowan/Data/ProfileModel.dart';
+import 'package:intl/intl.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {
@@ -23,10 +24,63 @@ class SupabaseService {
     return res.data;
   }
 
+  static addClock({DateTime? time, String? note, bool? active}) async {
+    final data = await client!.from('time_noti').insert({
+      'user_id': profile!.id,
+      'time': time!.toString(),
+      'note': note == '' ? 'ไม่มีคำบรรยาย' : note,
+      'status': active.toString()
+    }).execute();
+    return data.data[0];
+  }
+
+  static deleteClock(int id) async {
+    final data =
+        await client!.from('time_noti').delete().match({'id': id}).execute();
+  }
+
   static getProfile() async {
     final res = await client!.from('profile').select().execute();
     print(res.data);
     return res.data;
+  }
+
+  static editClockStatus(int id, bool value) async {
+    final res = await client!
+        .from('time_noti')
+        .update({
+          'status': value,
+        })
+        .eq('id', id)
+        .execute();
+  }
+
+  static getClock() async {
+    final res = await client!
+        .from('time_noti')
+        .select()
+        .filter('user_id', 'eq', profile!.id)
+        .execute();
+    print(res.data);
+    return res.data;
+  }
+
+  static updateProfile(
+      {String? name, String? email, bool? isMale, DateTime? birth}) async {
+    String? birthPayloadData = DateFormat('yyyy-MM-dd').format(birth!);
+    final res = await client!
+        .from('profile')
+        .update({
+          'name': name!,
+          'email': email!,
+          'birth_date': birthPayloadData,
+          'gender': isMale! ? 0 : 1
+        })
+        .eq('id', profile!.id)
+        .execute();
+    print(res.data);
+    profile = Profile.fromJson(res.data[0]);
+    return true;
   }
 
   static Future<bool?> login(String email, String password) async {

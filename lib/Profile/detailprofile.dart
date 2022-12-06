@@ -1,5 +1,6 @@
 import 'package:baowan/Data/GlobalVar.dart';
 import 'package:baowan/Profile/EditProfile.dart';
+import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -14,12 +15,6 @@ class DetailProfile extends StatefulWidget {
 }
 
 class _DetailProfileState extends State<DetailProfile> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,17 +60,17 @@ class _DetailProfileState extends State<DetailProfile> {
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () async {
-                    var res = await Navigator.push(
+                    bool res = await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => EditProfile(
-                          data: profile,
+                          data: profile!,
                         ),
                       ),
                     );
-                    // setState(() {
-                    //   json = res;
-                    // });
+                    if (res == true) {
+                      setState(() {});
+                    }
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 24, bottom: 20),
