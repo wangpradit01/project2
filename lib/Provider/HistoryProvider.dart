@@ -1,9 +1,6 @@
 import 'package:baowan/Data/FoodList.dart';
 import 'package:baowan/Data/NutrientModel.dart';
-import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 
 class HistoryProvider with ChangeNotifier {

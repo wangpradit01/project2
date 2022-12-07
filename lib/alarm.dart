@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:baowan/services/supabase_service.dart';
 import 'package:baowan/tapmanu.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,7 +42,9 @@ class _AlarmState extends State<Alarm> {
     for (var i = 0; i < notiList.length; i++) {
       if (notiList[i]['status']) {
         DateTime date = DateTime.parse(notiList[i]['time']);
-        FlutterAlarmClock.createAlarm(date.hour, date.minute);
+        if (Platform.isAndroid) {
+          FlutterAlarmClock.createAlarm(date.hour, date.minute);
+        }
       }
     }
   }
@@ -303,12 +307,13 @@ class _AlarmState extends State<Alarm> {
                                           note: tempNotiName);
                                       setState(() {
                                         notiList.add(res);
-                                        FlutterAlarmClock.createAlarm(
-                                            tempTime.hour, tempTime.minute,
-                                            title: tempNotiName == ''
-                                                ? 'ไม่มีคำบรรยาย'
-                                                : tempNotiName!);
-
+                                        if (Platform.isAndroid) {
+                                          FlutterAlarmClock.createAlarm(
+                                              tempTime.hour, tempTime.minute,
+                                              title: tempNotiName == ''
+                                                  ? 'ไม่มีคำบรรยาย'
+                                                  : tempNotiName!);
+                                        }
                                         tempNotistatus = true;
                                         tempNotiName = '';
                                       });
@@ -442,9 +447,12 @@ class _AlarmState extends State<Alarm> {
                                                         DateTime.parse(
                                                             notiList[index]
                                                                 ['time']);
-                                                    FlutterAlarmClock
-                                                        .createAlarm(time.hour,
-                                                            time.minute);
+                                                    if (Platform.isAndroid) {
+                                                      FlutterAlarmClock
+                                                          .createAlarm(
+                                                              time.hour,
+                                                              time.minute);
+                                                    }
                                                   }
                                                   notiList[index]['status'] =
                                                       value;

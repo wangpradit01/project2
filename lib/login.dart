@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -202,6 +203,11 @@ class _LoginPageState extends State<LoginPage> {
                   bool? res =
                       await SupabaseService.login(email.text, password.text);
                   if (res == true) {
+                    final SharedPreferences access =
+                        await SharedPreferences.getInstance();
+                    await access.setBool('isLogin', true);
+                    await access.setString('email', email.text);
+                    await access.setString('password', password.text);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),

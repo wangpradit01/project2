@@ -1,10 +1,13 @@
 import 'package:baowan/Profile/detailprofile.dart';
+import 'package:baowan/login.dart';
+import 'package:baowan/services/supabase_service.dart';
 import 'package:baowan/tapmanu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -165,7 +168,52 @@ class _SettingState extends State<Setting> {
           Container(
             child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () => print('tap'),
+                onTap: () async {
+                  showDialog<void>(
+                    context: context,
+                    barrierDismissible: false, // user must tap button!
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('ออกจากระบบ'),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: const <Widget>[
+                              Text('คุณต้องการที่จะออกจากระบบ ใช่หรือไม่'),
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('ใช่'),
+                            onPressed: () async {
+                              final SharedPreferences access =
+                                  await SharedPreferences.getInstance();
+                              await access.setBool('isLogin', false);
+                              await access.remove('email');
+                              await access.remove('password');
+                              Navigator.pop(context);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          LoginPage()),
+                                  (route) => false);
+                            },
+                          ),
+                          TextButton(
+                            child: const Text(
+                              'ปิด',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   height: 65,

@@ -1,9 +1,11 @@
+import 'package:baowan/HomePage.dart';
 import 'package:baowan/Provider/FoodProvider.dart';
 import 'package:baowan/Provider/HistoryProvider.dart';
 import 'package:baowan/login.dart';
 import 'package:baowan/services/supabase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -16,14 +18,32 @@ void main() async {
   await SupabaseService.init();
   await SupabaseService.getFood();
   await SupabaseService.getCarb();
-  await SupabaseService.getProfile();
+
+  final SharedPreferences access = await SharedPreferences.getInstance();
+  bool? isLogin = access.getBool('isLogin');
+  if (isLogin == true) {
+    String? email = access.getString('email');
+    String? password = access.getString('password');
+    await SupabaseService.login(email!, password!);
+  }
   // SupabaseService.addFood();
-  runApp(const MyApp());
+  runApp(MyApp(
+    isLogin: isLogin,
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  final bool? isLogin;
+  const MyApp({
+    Key? key,
+    this.isLogin,
+  }) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -41,7 +61,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           fontFamily: 'Prompt',
         ),
-        home: LoginPage(),
+        home: widget.isLogin == true ? HomePage() : LoginPage(),
       ),
     );
   }
