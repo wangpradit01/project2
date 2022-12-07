@@ -45,6 +45,43 @@ class SupabaseService {
     return res.data;
   }
 
+  static changePassword(String newPassword) async {
+    await client!.from('profile').update({
+      'password': newPassword,
+    }).match({'id': profile!.id}).execute();
+  }
+
+  static resetPassword(String email, String newPassword) async {
+    final res = await client!.from('profile').update({
+      'password': newPassword,
+    }).match({'email': email}).execute();
+    print(res.data);
+    return res.data;
+  }
+
+  static checkEmail(String? email) async {
+    final res = await client!.from('profile').select().match({
+      'email': email,
+    }).execute();
+    return res.data;
+  }
+
+  static createAccount(
+      {String? email,
+      String? password,
+      String? birth,
+      String? name,
+      bool? isMale}) async {
+    final data = await client!.from('profile').insert({
+      'email': email,
+      'password': password,
+      'name': name,
+      'birth_date': birth,
+      'gender': isMale! ? 0 : 1,
+    }).execute();
+    return data.data[0];
+  }
+
   static editClockStatus(int id, bool value) async {
     final res = await client!
         .from('time_noti')

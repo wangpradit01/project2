@@ -1,4 +1,4 @@
-import 'package:baowan/forgetpassword.dart';
+import 'package:baowan/ForgotPassword.dart';
 import 'package:baowan/HomePage.dart';
 import 'package:baowan/regis.dart';
 import 'package:baowan/services/supabase_service.dart';
@@ -270,7 +270,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ForgetPassword()),
+                                builder: (context) => ForgotPassword()),
                           );
                         },
                       )

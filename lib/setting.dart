@@ -1,3 +1,4 @@
+import 'package:baowan/ChangePassword.dart';
 import 'package:baowan/Profile/detailprofile.dart';
 import 'package:baowan/login.dart';
 import 'package:baowan/services/supabase_service.dart';
@@ -108,7 +109,12 @@ class _SettingState extends State<Setting> {
           Container(
             child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                onTap: () => print('tap'),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ChangePassword(),
+                      ),
+                    ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   height: 65,
